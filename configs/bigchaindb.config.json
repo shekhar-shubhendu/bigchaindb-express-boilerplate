@@ -1,0 +1,8 @@
+{
+    "host": "http://localhost:9984/api/v1/",
+    "auth":{
+        "required": false,
+        "app_id": "Get one from testnet.bigchaindb.com",
+        "app_key": "Get one from testnet.bigchaindb.com"
+    }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "bigchaindb-template",
+  "version": "1.0.0",
+  "description": "Base template for all BigchainDb PoCs and Projects",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch & nodemon dist",
+    "test": "tsc && mocha dist/**/*.spec.js",
+    "lint": "eslint src --ext ts",
+    "tsc": "tsc"
+  },
+  "keywords": [
+    "bigchaindb",
+    "template",
+    "orm",
+    "typescript",
+    "rest",
+    "express"
+  ],
+  "author": "Shubhendu Shekhar",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "bigchaindb-orm": "2.0.0",
+    "body-parser": "1.18.3",
+    "express": "4.16.3"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "5.2.4",
+    "@types/node": "10.5.1",
+    "@types/supertest": "^2.0.4",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb-base": "13.0.0",
+    "eslint-plugin-import": "2.13.0",
+    "eslint-plugin-promise": "3.8.0",
+    "mocha": "5.2.0",
+    "nodemon": "^1.17.5",
+    "supertest": "3.1.0",
+    "typescript": "2.9.2",
+    "typescript-eslint-parser": "16.0.1"
+  }
+}
