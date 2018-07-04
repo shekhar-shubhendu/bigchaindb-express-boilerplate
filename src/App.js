@@ -25,21 +25,20 @@ class App {
 
   setupORM () {
     if (bdbConfig.auth.required) {
-      this.bdbORM = new Orm(bdbConfig.host,
-        {
-          app_id: bdbConfig.auth.app_id,
-          app_key: bdbConfig.auth.app_key
-        });
+      this.bdbORM = new Orm(bdbConfig.host, {
+        app_id: bdbConfig.auth.app_id,
+        app_key: bdbConfig.auth.app_key
+      });
     } else {
       this.bdbORM = new Orm(bdbConfig.host);
     }
   }
 
   setupRoutes () {
-    for (let i = 0; i < this.assets.length; i += 1) {
-      this.bdbORM.define(this.assets[i].name, this.assets[i].schema);
-      const CRABRouter = new AssetCRABRouter(express, this.bdbORM, this.assets[i].name).getRouter();
-      this.express.use(`/${this.assets[i].name}`, CRABRouter);
+    for (const asset of this.assets) {
+      this.bdbORM.define(asset.name, asset.schema);
+      const CRABRouter = new AssetCRABRouter(express, this.bdbORM, asset.name).getRouter();
+      this.express.use(`/api/v1/${asset.name}`, CRABRouter);
     }
   }
 }

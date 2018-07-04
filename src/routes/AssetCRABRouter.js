@@ -1,10 +1,28 @@
 import BaseRouter from '../base/BaseRouter';
 
 export default class AssetCRABRouter extends BaseRouter {
+  /**
+     *
+     * @param {Object} express an object of express app
+     * @param {Object} bdbORM an object of bigchaindb-orm
+     * @param {string} assetName name of the asset
+     */
   constructor (express, bdbORM, assetName) {
     super(express, bdbORM, assetName);
   }
 
+  /**
+     * Overriden from BaseRouter
+     * Returns the initialized Router
+     */
+  getRouter () {
+    return this.router;
+  }
+
+  /**
+     * Overriden from BaseRouter
+     * Required by BaseRouter to initialize and register routes
+     */
   registerRoutes () {
     this.router.post('/', (req, res) => {
       const userKeypair = req.body.keypair;
@@ -49,25 +67,55 @@ export default class AssetCRABRouter extends BaseRouter {
     });
   }
 
+  /**
+     * Create the Asset on BigchainDB
+     *
+     * @param {Object} userKeypair Ed25519 keypair
+     * @param {Object} metadata Metadata that will be used during asset creation
+     */
   createAsset (userKeypair, metadata) {
     return this.bdbORM.models[this.assetName].create({
       keypair: userKeypair,
       data: metadata
-    }).then((asset) => asset).catch((error) => Promise.resolve({ error }));
+    }).then((asset) => asset).catch((error) => Promise.resolve({
+      error
+    }));
   }
 
+  /**
+     * Retrieve the Asset using asset id
+     *
+     * @param {string} assetid asset id of the asset created on blockchain
+     */
   retrieveAsset (assetid) {
     return this.bdbORM.models[this.assetName]
       .retrieve(assetid)
-      .then((asset) => asset).catch((error) => Promise.resolve({ error }));
+      .then((asset) => asset).catch((error) => Promise.resolve({
+        error
+      }));
   }
 
+  /**
+     *
+     * Retrieve all the assets(of this asset type)
+     */
   retrieveAllAssets () {
     return this.bdbORM.models[this.assetName]
       .retrieve()
-      .then((asset) => asset).catch((error) => Promise.resolve({ error }));
+      .then((asset) => asset).catch((error) => Promise.resolve({
+        error
+      }));
   }
 
+  /**
+     *
+     * Append/Update/Spend the asset
+     *
+     * @param {string} assetid asset id of the asset created on blockchain
+     * @param {Object} userKeypair Ed25519 keypair
+     * @param {string} toPublicKey publicKey
+     * @param {Object} metadata Asset Metadata
+     */
   appendAsset (assetid, userKeypair, toPublicKey, metadata) {
     return this.bdbORM.models[this.assetName]
       .retrieve(assetid)
@@ -75,18 +123,25 @@ export default class AssetCRABRouter extends BaseRouter {
         toPublicKey,
         keypair: userKeypair,
         data: metadata
-      })).catch((error) => Promise.resolve({ error }));
+      })).catch((error) => Promise.resolve({
+        error
+      }));
   }
 
+  /**
+     *
+     * Burn/Mark the asset unspendable
+     *
+     * @param {string} assetid asset id of the asset created on blockchain
+     * @param {Object} userKeypair Ed25519 keypair
+     */
   burnAsset (assetid, userKeypair) {
     return this.bdbORM.models[this.assetName]
       .retrieve(assetid)
       .then((asset) => asset.burn({
         keypair: userKeypair
-      })).catch((error) => Promise.resolve({ error }));
-  }
-
-  getRouter () {
-    return this.router;
+      })).catch((error) => Promise.resolve({
+        error
+      }));
   }
 }
