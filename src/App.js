@@ -1,11 +1,9 @@
 import express from 'express';
 import AssetCRABRouter from './routers/AssetCRABRouter';
-import assetConfig from './configs/asset.config.json';
 import ORMService from './services/ORMService';
 
 class App {
   constructor () {
-    this.assets = assetConfig.assets;
     this.express = express();
     this.ormService = new ORMService();
     this.configureServer();
@@ -23,9 +21,9 @@ class App {
   }
 
   setupRoutes () {
-    for (const asset of this.assets) {
-      const CRABRouter = new AssetCRABRouter(express, this.ormService, asset.name).getRouter();
-      this.express.use(`/api/v1/${asset.name}`, CRABRouter);
+    for (const asset of this.ormService.assets) {
+      const CRABRouter = new AssetCRABRouter(express, this.ormService, asset).getRouter();
+      this.express.use(`/api/v1/${asset}`, CRABRouter);
     }
   }
 }
