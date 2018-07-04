@@ -1,0 +1,16 @@
+{
+    "assets": [
+        {
+        "name": "myModel1",
+        "schema": {
+            "key": "value"
+        }
+        },
+        {
+        "name": "myModel2",
+        "schema": {
+            "key": "value"
+        }
+        }
+    ]
+}
