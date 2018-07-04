@@ -1,15 +1,14 @@
 import express from 'express';
-import Orm from 'bigchaindb-orm';
-import AssetCRABRouter from './routes/AssetCRABRouter';
-import bdbConfig from './configs/bigchaindb.config.json';
+import AssetCRABRouter from './routers/AssetCRABRouter';
 import assetConfig from './configs/asset.config.json';
+import ORMService from './services/ORMService';
 
 class App {
   constructor () {
     this.assets = assetConfig.assets;
     this.express = express();
+    this.ormService = new ORMService();
     this.configureServer();
-    this.setupORM();
     this.setupRoutes();
   }
 
@@ -23,21 +22,9 @@ class App {
     });
   }
 
-  setupORM () {
-    if (bdbConfig.auth.required) {
-      this.bdbORM = new Orm(bdbConfig.host, {
-        app_id: bdbConfig.auth.app_id,
-        app_key: bdbConfig.auth.app_key
-      });
-    } else {
-      this.bdbORM = new Orm(bdbConfig.host);
-    }
-  }
-
   setupRoutes () {
     for (const asset of this.assets) {
-      this.bdbORM.define(asset.name, asset.schema);
-      const CRABRouter = new AssetCRABRouter(express, this.bdbORM, asset.name).getRouter();
+      const CRABRouter = new AssetCRABRouter(express, this.ormService, asset.name).getRouter();
       this.express.use(`/api/v1/${asset.name}`, CRABRouter);
     }
   }
