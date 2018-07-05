@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "serve": "npm run build && node dist/bin/www",
     "test": "npm run build && mocha dist/**/*.spec.js",
-    "lint": "eslint src --ext js --fix"
+    "lint": "eslint src --ext js"
   },
   "keywords": [
     "bigchaindb",
@@ -22,18 +22,18 @@
   "author": "Shubhendu Shekhar",
   "license": "Apache-2.0",
   "dependencies": {
-    "app-root-path": "^2.1.0",
+    "app-root-path": "2.1.0",
     "bigchaindb-orm": "2.0.0",
-    "body-parser": "1.18.3",
     "express": "4.16.3",
-    "morgan": "^1.9.0",
-    "winston": "^3.0.0"
+    "http-errors": "1.6.3",
+    "morgan": "1.9.0",
+    "winston": "3.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-watch": "^2.0.7",
+    "babel-cli": "6.26.0",
+    "babel-eslint": "8.2.5",
+    "babel-preset-env": "1.7.0",
+    "babel-watch": "2.0.7",
     "eslint": "4.19.1",
     "eslint-config-airbnb-base": "13.0.0",
     "eslint-plugin-import": "2.13.0",

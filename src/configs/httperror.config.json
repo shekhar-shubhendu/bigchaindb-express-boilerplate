@@ -1,0 +1,6 @@
+{
+    "400": "Bad Request",
+    "404": "Page/Path Not Found",
+    "401": "You are unauthorized",
+    "500": "Oops! We've encountered an error at our end. Hold tight"
+}

@@ -1,4 +1,3 @@
-import * as bodyParser from 'body-parser';
 import express from 'express';
 
 export default class AbstractRouter {
@@ -13,10 +12,10 @@ export default class AbstractRouter {
       throw new TypeError('Must implement/override abstract method getRouter');
     }
     this.router = express.Router();
-    this.router.use(bodyParser.urlencoded({
+    this.router.use(express.urlencoded({
       extended: false
     }));
-    this.router.use(bodyParser.json());
+    this.router.use(express.json());
     this.registerRoutes();
   }
 
