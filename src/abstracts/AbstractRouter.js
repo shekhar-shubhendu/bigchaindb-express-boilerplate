@@ -1,11 +1,8 @@
 import * as bodyParser from 'body-parser';
+import express from 'express';
 
 export default class AbstractRouter {
-  /**
-     *
-     * @param {Object} express an object of express app
-     */
-  constructor (express) {
+  constructor() {
     if (this.constructor === AbstractRouter) {
       throw new TypeError('Cannot construct instances of abstract class BaseRouter directly. Must extend it.');
     }
@@ -15,8 +12,7 @@ export default class AbstractRouter {
     if (this.getRouter === AbstractRouter.prototype.getRouter) {
       throw new TypeError('Must implement/override abstract method getRouter');
     }
-    this.express = express;
-    this.router = this.express.Router();
+    this.router = express.Router();
     this.router.use(bodyParser.urlencoded({
       extended: false
     }));
@@ -24,11 +20,11 @@ export default class AbstractRouter {
     this.registerRoutes();
   }
 
-  registerRoutes () {
+  registerRoutes() {
     throw new TypeError('Do not call abstract method registerRoutes from child.');
   }
 
-  getRouter () {
+  getRouter() {
     throw new TypeError('Do not call abstract method getRouter from child.');
   }
 }

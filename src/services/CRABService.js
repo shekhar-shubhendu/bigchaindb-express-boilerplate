@@ -1,18 +1,20 @@
+import ORMService from "./ORMService";
+
 export default class CRABService {
   /**
-     * @param {string} assetName name of the asset
-     */
-  constructor (ormService, assetName) {
-    this.assetModel = ormService.getModel(assetName);
+   * @param {string} assetName name of the asset
+   */
+  constructor(assetName) {
+    this.assetModel = new ORMService().getModel(assetName);
   }
 
   /**
-     * Create the Asset on BigchainDB
-     *
-     * @param {Object} userKeypair Ed25519 keypair
-     * @param {Object} metadata Metadata that will be used during asset creation
-     */
-  createAsset (userKeypair, metadata) {
+   * Create the Asset on BigchainDB
+   *
+   * @param {Object} userKeypair Ed25519 keypair
+   * @param {Object} metadata Metadata that will be used during asset creation
+   */
+  createAsset(userKeypair, metadata) {
     return this.assetModel.create({
       keypair: userKeypair,
       data: metadata
@@ -22,11 +24,11 @@ export default class CRABService {
   }
 
   /**
-     * Retrieve the Asset using asset id
-     *
-     * @param {string} assetid asset id of the asset created on blockchain
-     */
-  retrieveAsset  (assetid) {
+   * Retrieve the Asset using asset id
+   *
+   * @param {string} assetid asset id of the asset created on blockchain
+   */
+  retrieveAsset(assetid) {
     return this.assetModel
       .retrieve(assetid)
       .then((asset) => asset).catch((error) => Promise.resolve({
@@ -35,10 +37,10 @@ export default class CRABService {
   }
 
   /**
-     *
-     * Retrieve all the assets(of this asset type)
-     */
-  retrieveAllAssets  () {
+   *
+   * Retrieve all the assets(of this asset type)
+   */
+  retrieveAllAssets() {
     return this.assetModel
       .retrieve()
       .then((asset) => asset).catch((error) => Promise.resolve({
@@ -47,15 +49,15 @@ export default class CRABService {
   }
 
   /**
-     *
-     * Append/Update/Spend the asset
-     *
-     * @param {string} assetid asset id of the asset created on blockchain
-     * @param {Object} userKeypair Ed25519 keypair
-     * @param {string} toPublicKey publicKey
-     * @param {Object} metadata Asset Metadata
-     */
-  appendAsset (assetid, userKeypair, toPublicKey, metadata) {
+   *
+   * Append/Update/Spend the asset
+   *
+   * @param {string} assetid asset id of the asset created on blockchain
+   * @param {Object} userKeypair Ed25519 keypair
+   * @param {string} toPublicKey publicKey
+   * @param {Object} metadata Asset Metadata
+   */
+  appendAsset(assetid, userKeypair, toPublicKey, metadata) {
     return this.assetModel
       .retrieve(assetid)
       .then((asset) => asset.append({
@@ -68,13 +70,13 @@ export default class CRABService {
   }
 
   /**
-     *
-     * Burn/Mark the asset unspendable
-     *
-     * @param {string} assetid asset id of the asset created on blockchain
-     * @param {Object} userKeypair Ed25519 keypair
-     */
-  burnAsset (assetid, userKeypair) {
+   *
+   * Burn/Mark the asset unspendable
+   *
+   * @param {string} assetid asset id of the asset created on blockchain
+   * @param {Object} userKeypair Ed25519 keypair
+   */
+  burnAsset(assetid, userKeypair) {
     return this.assetModel
       .retrieve(assetid)
       .then((asset) => asset.burn({

@@ -22,7 +22,7 @@ class App {
 
   setupRoutes () {
     for (const asset of this.ormService.assets) {
-      const CRABRouter = new AssetCRABRouter(express, this.ormService, asset).getRouter();
+      const CRABRouter = new AssetCRABRouter(asset).getRouter();
       this.express.use(`/api/v1/${asset}`, CRABRouter);
     }
   }
