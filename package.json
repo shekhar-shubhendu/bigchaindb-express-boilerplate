@@ -4,9 +4,10 @@
   "description": "Base template for all BigchainDB based PoCs and Projects",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/babel src --out-dir dist --source-maps inline --copy-files",
-    "dev": "babel-watch -w src src/index.js",
-    "serve": "npm run build && node dist/index.js",
+    "build": "npm run clean && ./node_modules/.bin/babel src --out-dir dist --source-maps --copy-files",
+    "dev": "babel-watch -w src src/bin/www",
+    "clean": "rm -rf dist",
+    "serve": "npm run build && node dist/bin/www",
     "test": "npm run build && mocha dist/**/*.spec.js",
     "lint": "eslint src --ext js --fix"
   },
