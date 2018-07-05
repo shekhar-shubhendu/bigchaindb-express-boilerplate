@@ -13,14 +13,6 @@ export default class AssetCRABRouter extends AbstractRouter {
 
   /**
    * Overriden from BaseRouter
-   * Returns the initialized Router
-   */
-  getRouter() {
-    return this.router;
-  }
-
-  /**
-   * Overriden from BaseRouter
    * Required by BaseRouter to initialize and register routes
    */
   registerRoutes() {
