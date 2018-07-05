@@ -1,4 +1,5 @@
 import express from 'express';
+import { NotFoundErrorHandler, HttpErrorHandler } from '../handlers/ErrorHandler';
 
 export default class AbstractRouter {
   constructor() {
@@ -17,6 +18,8 @@ export default class AbstractRouter {
     }));
     this.router.use(express.json());
     this.registerRoutes();
+    this.router.use(NotFoundErrorHandler);
+    this.router.use(HttpErrorHandler);
   }
 
   registerRoutes() {

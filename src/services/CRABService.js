@@ -43,9 +43,9 @@ export default class CRABService {
   retrieveAllAssets() {
     return this.assetModel
       .retrieve()
-      .then((asset) => asset).catch((error) => Promise.resolve({
-        error
-      }));
+        .then((asset) => asset).catch((error) => Promise.resolve({
+          error
+        }));
   }
 
   /**
