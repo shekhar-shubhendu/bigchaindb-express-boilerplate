@@ -1,4 +1,6 @@
 import express from 'express';
+import morgan from 'morgan';
+import logger from './services/LoggerService';
 import AssetCRABRouter from './routers/AssetCRABRouter';
 import ORMService from './services/ORMService';
 
@@ -18,6 +20,7 @@ class App {
       res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
       next();
     });
+    this.express.use(morgan('combined', { stream: logger.stream }));
   }
 
   setupRoutes () {
