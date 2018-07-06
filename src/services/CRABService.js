@@ -60,11 +60,16 @@ export default class CRABService {
   appendAsset(assetid, userKeypair, toPublicKey, metadata) {
     return this.assetModel
       .retrieve(assetid)
-      .then((asset) => asset.append({
-        toPublicKey,
-        keypair: userKeypair,
-        data: metadata
-      })).catch((error) => Promise.resolve({
+      .then((asset) => {
+        if(asset.length){
+          return asset[0].append({
+            toPublicKey,
+            keypair: userKeypair,
+            data: metadata
+          });
+        }
+        return Promise.resolve({error: 'No asset found for this type'});
+      }).catch((error) => Promise.resolve({
         error
       }));
   }
@@ -79,9 +84,14 @@ export default class CRABService {
   burnAsset(assetid, userKeypair) {
     return this.assetModel
       .retrieve(assetid)
-      .then((asset) => asset.burn({
-        keypair: userKeypair
-      })).catch((error) => Promise.resolve({
+      .then((asset) => {
+        if(asset.length){
+          return asset[0].burn({
+            keypair: userKeypair
+          });
+        }
+        return Promise.resolve({error: 'No asset found for this type'});
+      }).catch((error) => Promise.resolve({
         error
       }));
   }
