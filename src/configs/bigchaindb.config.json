@@ -1,8 +1,11 @@
 {
-    "host": "http://localhost:9984/api/v1/",
+    "host": "http://localhost:9984",
+    "api": "/api/v1/",
     "auth":{
         "required": false,
         "app_id": "Get one from testnet.bigchaindb.com",
         "app_key": "Get one from testnet.bigchaindb.com"
-    }
+    },
+    "ws_host": "Set your WS host here",
+    "ws_url": "Set your WS url here"
 }

@@ -1,4 +1,4 @@
-import ORMService from "./ORMService";
+import ORMService from './ORMService';
 
 export default class CRABService {
   /**

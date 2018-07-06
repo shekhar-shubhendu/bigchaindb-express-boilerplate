@@ -1,6 +1,6 @@
 import winston from 'winston';
 import appRoot from 'app-root-path';
-import options from  '../configs/logger.config.json';
+import options from '../configs/logger.config.json';
 
 options.file.filename = `${appRoot}${options.file.filename}`;
 
@@ -13,7 +13,7 @@ const logger = winston.createLogger({
   });
   
   logger.stream = {
-    write: function(message, encoding) {
+    write: (message, encoding) => {
       logger.info(message);
     },
   };
