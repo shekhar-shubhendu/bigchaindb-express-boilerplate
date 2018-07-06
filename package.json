@@ -1,5 +1,5 @@
 {
-  "name": "bigchaindb-orm-express-boilerplate",
+  "name": "bigchaindb-express-boilerplate",
   "version": "1.0.0",
   "description": "BigchainDB Express Boilerplate",
   "main": "src/bin/www.js",
@@ -16,7 +16,7 @@
     "template",
     "orm",
     "es6",
-    "rest",
+    "blockchain",
     "express"
   ],
   "author": "Shubhendu Shekhar",
