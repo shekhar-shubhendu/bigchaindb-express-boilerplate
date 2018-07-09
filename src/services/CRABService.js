@@ -43,9 +43,9 @@ export default class CRABService {
   retrieveAllAssets() {
     return this.assetModel
       .retrieve()
-        .then((asset) => asset).catch((error) => Promise.resolve({
-          error
-        }));
+      .then((asset) => asset).catch((error) => Promise.resolve({
+        error
+      }));
   }
 
   /**
@@ -61,14 +61,13 @@ export default class CRABService {
     return this.assetModel
       .retrieve(assetid)
       .then((asset) => {
-        if(asset.length){
+        if (asset.length) {
           return asset[0].append({
             toPublicKey,
             keypair: userKeypair,
             data: metadata
           });
         }
-        return Promise.resolve({error: 'No asset found for this type'});
       }).catch((error) => Promise.resolve({
         error
       }));
@@ -85,12 +84,11 @@ export default class CRABService {
     return this.assetModel
       .retrieve(assetid)
       .then((asset) => {
-        if(asset.length){
+        if (asset.length) {
           return asset[0].burn({
             keypair: userKeypair
           });
         }
-        return Promise.resolve({error: 'No asset found for this type'});
       }).catch((error) => Promise.resolve({
         error
       }));
