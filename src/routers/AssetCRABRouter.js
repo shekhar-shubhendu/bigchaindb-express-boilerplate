@@ -12,8 +12,8 @@ export default class AssetCRABRouter extends AbstractRouter {
   }
 
   /**
-   * Overriden from BaseRouter
-   * Required by BaseRouter to initialize and register routes
+   * Overriden from AbstractRouter
+   * Required by AbstractRouter to initialize and register routes
    */
   registerRoutes() {
     this.router.post('/', (req, res) => {

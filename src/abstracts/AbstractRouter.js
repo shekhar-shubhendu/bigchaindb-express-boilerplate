@@ -4,7 +4,7 @@ import { NotFoundErrorHandler, HttpErrorHandler } from '../handlers/ErrorHandler
 export default class AbstractRouter {
   constructor() {
     if (this.constructor === AbstractRouter) {
-      throw new TypeError('Cannot construct instances of abstract class BaseRouter directly. Must extend it.');
+      throw new TypeError('Cannot construct instances of abstract class AbstractRouter directly. Must extend it.');
     }
     if (this.registerRoutes === AbstractRouter.prototype.registerRoutes) {
       throw new TypeError('Must implement/override abstract method registerRoutes');
